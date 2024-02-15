@@ -1,0 +1,116 @@
+{% extends 'dashboard/dashboardlayouts.html' %}
+{% load static %}
+
+
+{% block mainblock %}
+
+    <!-- main content start -->
+    <div class="main-content">
+        <div class="dashboard-breadcrumb mb-30">
+            <h2>Categories</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-xxl-4 col-md-5">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h5>Add New Category</h5>
+                    </div>
+                    <div class="panel-body">
+                        <form action="{% url 'add_category' %}" method="post">
+                            {% csrf_token %}
+                        
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <label class="form-label">Category Title</label>
+                                    <input type="text" name="title" class="form-control form-control-sm" id="categoryTitle">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label">Category Keywords</label>
+                                    <input type="text" name="categoryType" class="form-control form-control-sm" id="categoryType">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Category Description</label>
+                                    <input type="text" name="categoryType" class="form-control form-control-sm" id="categoryType">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Custom Category Icon</label>
+                                    <input type="text" name="icon" class="form-control form-control-sm" placeholder="Fontawesome 6 pro icon name">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Category Slug</label>
+                                    <input type="text" name="slug" class="form-control form-control-sm" id="categorySlug">
+                                </div>
+                                <div class="col-sm-6 " style="width: 100% !important;">
+                                    <label class="form-label">Kategoriya</label>
+                                    <select name="parent" class="form-control form-control-sm">
+                                        <option value="" selected>Elave et</option>
+                                        {% for category in categories %}
+                                            <option value="{{ category.id }}">
+                                                {% if category.parent %}
+                                                    {% for i in category.get_ancestors %}
+                                                        ----
+                                                    {% endfor %}
+                                                {% endif %}
+                                                {{ category.title }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>             
+                                <!-- /Üst Kategori Dropdown Listesi -->
+                                <div class="col-12 d-flex justify-content-end">
+                                    <div class="btn-box">
+                                        <button class="btn btn-sm btn-primary">Save Category</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                         
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-8 col-md-7">
+                <div class="panel">
+                <form action="{% url 'delete_selected_categories' %}" method="post">
+                    {% csrf_token %}
+                    <div class="panel-header">
+                        <h5>All Categories</h5>
+                        <button type="submit" class="btn btn-sm btn-danger">Secilen kategoriyalari sil</button>
+                    </div>
+
+                    <div class="table-responsive">    
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Category</th>
+                                <th scope="col">Product-Count</th>
+                                <th scope="col">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for category in categories %}
+                                <tr>
+                                    <td>
+                                        {% if category.parent %}
+                                            {% for i in category.get_ancestors %}
+                                                ----
+                                            {% endfor %}
+                                        {% endif %}
+                                        {{ category.title }}
+                                    </td>
+                                
+                                    <td>{{ category.product_count }}</td>
+                                    <td><input type="checkbox" name="selected_categories" value="{{ category.id }}"></td>
+                                </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                        </form>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- main content end -->
+{% endblock %}    
+    
+  

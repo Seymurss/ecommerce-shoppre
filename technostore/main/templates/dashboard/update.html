@@ -1,0 +1,114 @@
+
+{% extends 'dashboard/dashboardlayouts.html' %}
+{% load static %}
+
+
+{% block mainblock %}
+
+    <!-- main content start -->
+    <div class="main-content">
+        <div class="dashboard-breadcrumb mb-30">
+            <h2>Deyisiklik et</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-xxl-9 col-lg-8">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h5>Məhsul məlumatlari</h5>
+                        <div class="btn-box d-flex gap-2">
+                            <button class="btn btn-sm btn-icon btn-outline-primary panel-close"><i class="fa-light fa-angle-up"></i></button>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <form method="post" enctype="multipart/form-data" action="{% url 'edit_product' product_id=product.id %}">
+                            {% csrf_token %}
+                            <div class="row align-items-center g-3 mb-3">
+                                <label class="col-md-2 col-form-label col-form-label-sm">Basliq</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="title" value="{{ product.title}}" class="form-control form-control-sm" id="SKU">
+                                </div>
+                            </div>
+                            <div class="row align-items-center g-3 mb-3">
+                                <label class="col-md-2 col-form-label col-form-label-sm">Istehsalci</label>
+                                <div class="col-md-10">
+                                    <input type="text"   value="{{ product.brand}}" name="brand" class="form-control form-control-sm" id="SKU">
+                                </div>
+                            </div>     
+                            <div class="row align-items-center g-3 mb-3">
+                                <label class="col-md-2 col-form-label col-form-label-sm">Slug</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="slug" value="{{ product.slug}}" class="form-control form-control-sm" id="SKU">
+                                </div>
+                            </div>
+                            <div class="row align-items-center g-3 mb-3">
+                                <label class="col-md-2 col-form-label col-form-label-sm">Məhsul sayi</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="product_count" value="{{ product.product_count}}" class="form-control form-control-sm" id="Count">
+                                </div>
+                            </div>
+                            <div class="row align-items-center g-3 mb-3">
+                                <label class="col-md-2 col-form-label col-form-label-sm">Sku </label>
+                                <div class="col-md-10">
+                                    <input type="text" name="sku" value="{{ product.sku}}" class=" form-control form-control-sm" id="SKU">
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <label for="regularPrice"  class="col-md-2 col-form-label col-form-label-sm">Məbləg $</label>
+                                <div class="col-md-10">
+                                    <input type="number"  name="regular_price" value="{{ product.regular_price }}" class="form-control form-control-sm" id="regularPrice">
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <label for="salePrice" class="col-md-2 col-form-label col-form-label-sm">Endirim $</label>
+                                <div class="col-md-10">
+                                    <input type="number" value="{{ product.sale_price }}" name="sale_price" class="form-control form-control-sm" id="salePrice">
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <label for="salePrice" class="col-md-2 col-form-label col-form-label-sm">Aciqlama</label>
+                                <div class="col-md-10">
+                                    <textarea class="form-control" rows="5" name="description" id="metaDscr">
+                                        {{ product.description }}
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <label class="col-md-2 col-form-label col-form-label-sm">Esas-foto</label>
+                                <div class="col-md-10">
+                                    <input type="file"  class="form-control form-control-sm" id="photo1" name="primary_photo">
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <label class="col-md-2 col-form-label col-form-label-sm">Foto-1</label>
+                                <div class="col-md-10">
+                                    <input type="file" class="form-control form-control-sm" id="photo1" name="photo1">
+                                </div>
+                            </div>
+                            
+                            <div class="row g-3 mb-3">
+                                <label class="col-md-2 col-form-label col-form-label-sm">Foto-2</label>
+                                <div class="col-md-10">
+                                    <input type="file" class="form-control form-control-sm" id="photo2" name="photo2">
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <label class="col-md-2 col-form-label col-form-label-sm">Foto-3</label>
+                                <div class="col-md-10">
+                                    <input type="file" class="form-control form-control-sm" id="photo1" name="photo3">
+                                </div>
+                            </div>                     
+                            <div class="row g-3 mb-3">
+                                <label class="col-md-2 col-form-label col-form-label-sm">Foto-4</label>
+                                <div class="col-md-10">
+                                    <input type="file" class="form-control form-control-sm" id="photo2" name="photo4">
+                                </div>
+                            </div>
+                            <input type="submit" value="Elave et"></input>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- main content end -->
+{% endblock %}   

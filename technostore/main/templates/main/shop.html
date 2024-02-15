@@ -1,0 +1,237 @@
+{% extends 'main/layout.html' %}
+{% block title %} Shopping pages {% endblock title %}
+{% load static %}
+{% block content %}
+
+		<section class="flat-breadcrumb">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumbs">
+							<li class="trail-item">
+								<a href="#" title="">Home</a>
+								<span><img src="{% static 'images/icons/arrow-right.png' %}" alt=""></span>
+							</li>
+							<li class="trail-item">
+								<a href="#" title="">Shop</a>
+								<span><img src="{% static 'images/icons/arrow-right.png' %}" alt=""></span>
+							</li>
+							<li class="trail-end">
+								<a href="#" title="">Mobile & Tablet</a>
+							</li>
+						</ul><!-- /.breacrumbs -->
+					</div><!-- /.col-md-12 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section><!-- /.flat-breadcrumb -->
+
+		<main id="shop">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-md-4">
+						<div class="sidebar ">
+							<div class="widget widget-price">
+								<div class="widget-title">
+									<h3>Məbləg<span></span></h3>
+								</div>
+								<div class="widget-content">
+									<div class="price search-filter-input">
+										<div id="slider-range" class="price-slider"></div>
+										<p class="amount">
+											<input type="text" id="amount" readonly>
+										</p>
+									</div>
+								</div>
+							</div><!-- /.widget widget-price -->
+							<div class="widget widget-brands">
+								<div class="widget-title">
+									<h3>İstehsalci<span></span></h3>
+								</div>
+								<div class="widget-content">
+									<ul class="box-checkbox scroll">
+										{% for brand, count in brands %}
+										<li class="check-box">
+											<input type="checkbox" id="{{ brand }}" name="{{ brand }}">
+											<label for="{{ brand }}">{{ brand }}</span></label>
+										</li>
+										{% endfor %}
+									</ul>
+									
+								</div>
+							</div><!-- /.widget widget-brands -->
+							<div class="widget widget-color">
+								<div class="widget-title">
+									<h3>Rəng<span></span></h3>
+									<div style="height: 2px"></div>
+								</div>
+								<div class="widget-content">
+									<div style="height: 5px"></div>
+									<ul class="box-checkbox scroll">
+										{% for color in colors %}
+										<li class="check-box">
+											<input type="checkbox" id="check1" name="check1">
+											<label for="check1">{{ color.color}}</label>
+										</li>
+										{% endfor %}
+									</ul>
+								</div>
+							</div><!-- /.widget widget-color -->
+						</div><!-- /.sidebar -->
+					</div><!-- /.col-lg-3 col-md-4 -->
+					<div class="col-lg-9 col-md-8">
+						<div class="main-shop">
+							<div class="slider owl-carousel-16">
+								<div class="slider-item style9">
+									<div class="item-text">
+										<div class="header-item">
+											<p>You can build the banner for other category</p>
+											<h2 class="name">Shop Banner</h2>
+										</div>
+									</div>
+									<div class="item-image">
+										<img src="{% static 'images/banner_boxes/07.png' %}" alt="">
+									</div>
+									<div class="clearfix"></div>
+								</div><!-- /.slider-item style9 -->
+								<div class="slider-item style9">
+									<div class="item-text">
+										<div class="header-item">
+											<p>You can build the banner for other category</p>
+											<h2 class="name">Shop Banner</h2>
+										</div>
+									</div>
+									<div class="item-image">
+										<img src="{% static 'images/banner_boxes/07.png' %}" alt="">
+									</div>
+									<div class="clearfix"></div>
+								</div><!-- /.slider-item style9 -->
+								
+							</div><!-- /.slider -->
+							<div class="wrap-imagebox">
+								<div class="flat-row-title">
+									<h3>Mobile & Tablet</h3>
+									<span>
+										Showing 1–15 of 20 results
+									</span>
+									<div class="clearfix"></div>
+								</div>
+								<div class="tab-product">
+									<div class="row sort-box">
+										{% for shop_product in products %}
+
+											<div class="col-lg-4 col-sm-6">
+												<div class="product-box" style="height: 465px; margin-top: 10px; margin-bottom: -5px;">
+													<div class="imagebox">
+														<div class="box-image owl-carousel-1">
+															{% if shop_product.primary_photo %}
+																<a href="#" title="">
+																	<img style="height: 165px;" src="{{ shop_product.primary_photo.url }}" alt="">
+																</a>
+															{% endif %}	
+															
+															{% if shop_product.photo1%}
+																<a href="#" title="">
+																	<img style="height: 165px;" src="{{ shop_product.photo1.url }}" alt="">
+																</a>
+															{% endif %}
+															{% if shop_product.photo2 %}
+																<a href="#" title="">
+																	<img style="height: 165px;" src="{{ shop_product.photo2.url}}" alt="">
+																</a>
+															{% endif %}	
+
+															{% if shop_product.photo3 %}
+																<a href="#" title="">
+																	<img style="height: 165px;" src="{{ shop_product.photo3.url}}" alt="">
+																</a>
+															{% endif %}
+
+															{% if shop_product.photo4 %}
+																<a href="#" title="">
+																	<img style="height: 165px;" src="{{ shop_product.photo4.url}}" alt="">
+																</a>
+															{% endif %}	
+															
+														</div><!-- /.box-image -->
+														<div class="box-content">
+															<div class="cat-name">
+																<a href="#" title="">{{ shop_product.sub_sub_category.title}}</a>
+															</div>
+															<div class="product-name">
+																<a href="{% url 'product_detail' product_slug=shop_product.slug %}" title="{{ shop_product.title }}">{{ shop_product.title }}</a>
+															</div>	
+															<div class="price">
+																<span class="sale">{{ shop_product.sale_price }}</span>
+																<span class="regular">{{ shop_product.regular_price }}</span>
+															</div>
+														</div><!-- /.box-content -->
+														<div class="box-bottom">
+															<div class="btn-add-cart">
+																<form method="post" action="{% url 'sepete_ekle' product_id=shop_product.id %}">
+																	{% csrf_token %}
+																	<button type="submit" style="width: 204px; margin-top: 5px;">
+																		<img src="{% static 'images/icons/add-cart.png' %}" alt="">	Səbətə Əlavə et
+																	</button>
+																</form>
+															</div>
+															<div class="compare-wishlist">
+																<a href="#" class="compare" title="">
+																	<img src="{% static 'images/icons/compare.png' %}" alt="">Compare
+																</a>
+																<a href="#" class="wishlist" title="">
+																	<img src="{% static 'images/icons/wishlist.png' %}" alt="">Wishlist
+																</a>
+															</div>
+														</div><!-- /.box-bottom -->
+													</div><!-- /.imagebox -->
+												</div>
+											</div><!-- /.col-lg-4 col-sm-6 -->
+										{% endfor %}	
+									</div>
+								</div>
+							</div><!-- /.wrap-imagebox -->
+							<div class="blog-pagination" style="height: 50px;">
+								<!-- Sayfalama bağlantıları -->
+								<span>
+									Showing {{ products.start_index }}–{{ products.end_index }} of {{ products.paginator.count }} results
+								</span>
+								<ul class="flat-pagination style1" style="margin-top: -11px;">
+									{% if products.has_previous %}
+										<li class="prev">
+											<a href="?page=1" title="">
+												<img src="{% static 'images/icons/left-1.png' %}" alt="">İlk
+											</a>
+										</li>
+										<li class="prev">
+											<a href="?page={{ products.previous_page_number }}" title="">
+												<img src="{% static 'images/icons/left-1.png' %}" alt="">Geri
+											</a>
+										</li>
+									{% endif %}
+							
+									{% for num in products.paginator.page_range %}
+										<li{% if num == products.number %} class="active"{% endif %}>
+											<a href="?page={{ num }}" class="waves-effect" title="">{{ num }}</a>
+										</li>
+									{% endfor %}
+							
+									{% if products.has_next %}
+										<li class="next">
+											<a href="?page={{ products.next_page_number }}" title="">
+												İrəli<img src="{% static 'images/icons/right-1.png' %}" alt="">
+											</a>
+										</li>
+										<li class="next">
+											<a href="?page={{ products.paginator.num_pages }}" title="">
+												Son<img src="{% static 'images/icons/right-1.png' %}" alt="">
+											</a>
+										</li>
+									{% endif %}
+								</ul>
+							</div>
+						</div><!-- /.main-shop -->
+					</div><!-- /.col-lg-9 col-md-8 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</main><!-- /#shop -->
+{% endblock %}

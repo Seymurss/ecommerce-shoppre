@@ -1,0 +1,155 @@
+
+{% extends 'dashboard/dashboardlayouts.html' %}
+{% load static %}
+
+
+{% block mainblock %}
+
+    <!-- main content start -->
+    <div class="main-content">
+        <div class="dashboard-breadcrumb mb-30">
+            <h2>Yeni Məhsul</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-xxl-9 col-lg-8">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h5>Məhsul məlumatlari</h5>
+                        <div class="btn-box d-flex gap-2">
+                            <button class="btn btn-sm btn-icon btn-outline-primary panel-close"><i class="fa-light fa-angle-up"></i></button>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <form method="post" enctype="multipart/form-data" action="{% url  'add_product' %}">
+                            {% csrf_token %}
+                            <div class="row align-items-center g-3 mb-3">
+                                <label class="col-md-2 col-form-label col-form-label-sm">Basliq</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="title" class="form-control form-control-sm" id="SKU">
+                                </div>
+                            </div>
+                            <div class="row align-items-center g-3 mb-3">
+                                <label class="col-md-2 col-form-label col-form-label-sm">Istehsalci</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="brand" class="form-control form-control-sm" id="SKU">
+                                </div>
+                            </div>     
+                            <div class="row align-items-center g-3 mb-3">
+                                <label class="col-md-2 col-form-label col-form-label-sm">Slug</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="slug" class="form-control form-control-sm" id="SKU">
+                                </div>
+                            </div>
+                            <div class="row align-items-center g-3 mb-3">
+                                <label class="col-md-2 col-form-label col-form-label-sm">Məhsul sayi</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="product_count" class="form-control form-control-sm" id="Count">
+                                </div>
+                            </div>
+                            <div class="row align-items-center g-3 mb-3">
+                                <label class="col-md-2 col-form-label col-form-label-sm">Sku </label>
+                                <div class="col-md-10">
+                                    <input type="text" name="sku" class="form-control form-control-sm" id="SKU">
+                                </div>
+                            </div>
+                            <div class="row align-items-center g-3 mb-3">
+                                <label class="col-md-2 col-form-label col-form-label-sm">Status</label>
+                                <div class="col-md-10">
+                                    <select class="form-control form-control-sm" name="stock_status">
+                                        <option value="0">Stokda movcuddur</option>
+                                        <option value="1">Stokda movcud deyil</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <label for="regularPrice" class="col-md-2 col-form-label col-form-label-sm">Məbləg $</label>
+                                <div class="col-md-10">
+                                    <input type="number" name="regular_price" class="form-control form-control-sm" id="regularPrice">
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <label for="salePrice" class="col-md-2 col-form-label col-form-label-sm">Endirim $</label>
+                                <div class="col-md-10">
+                                    <input type="number" name="sale_price" class="form-control form-control-sm" id="salePrice">
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-10" style="margin-left: 116px;">
+                                    <select id="parent_category" name="parent_category" class="form-control form-control-sm">
+                                        <option value="" selected>Kategoriya</option>
+                                        {% for category in categories %}
+                                            {% if not category.parent %}
+                                                <option value="{{ category.id }}">{{ category.title }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                                             
+                                    <select id="sub_category" name="sub_category" class="form-control form-control-sm" disabled>
+                                        <option value="" selected>Alt-kategoriya</option>
+                                    </select>
+                                
+                                    <select id="sub_sub_category" name="sub_sub_category" class="form-control form-control-sm" disabled>
+                                        <option value="" selected>Sub-kategoriya</option>
+                                    </select>
+                                
+                                    
+                                </div>  
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <label for="salePrice" class="col-md-2 col-form-label col-form-label-sm">Aciqlama</label>
+                                <div class="col-md-10">
+                                    <textarea class="form-control" rows="5" name="description" id="metaDscr"></textarea>
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <label class="col-md-2 col-form-label col-form-label-sm">Esas-foto</label>
+                                <div class="col-md-10">
+                                    <input type="file" class="form-control form-control-sm" id="photo1" name="primary_photo">
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <label class="col-md-2 col-form-label col-form-label-sm">Foto-1</label>
+                                <div class="col-md-10">
+                                    <input type="file" class="form-control form-control-sm" id="photo1" name="photo1">
+                                </div>
+                            </div>
+                            
+                            <div class="row g-3 mb-3">
+                                <label class="col-md-2 col-form-label col-form-label-sm">Foto-2</label>
+                                <div class="col-md-10">
+                                    <input type="file" class="form-control form-control-sm" id="photo2" name="photo2">
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <label class="col-md-2 col-form-label col-form-label-sm">Foto-3</label>
+                                <div class="col-md-10">
+                                    <input type="file" class="form-control form-control-sm" id="photo1" name="photo3">
+                                </div>
+                            </div>                     
+                            <div class="row g-3 mb-3">
+                                <label class="col-md-2 col-form-label col-form-label-sm">Foto-4</label>
+                                <div class="col-md-10">
+                                    <input type="file" class="form-control form-control-sm" id="photo2" name="photo4">
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <label for="salePrice" class="col-md-2 col-form-label col-form-label-sm">Xususiyetler</label>
+                                <div class="col-md-10">
+                                    <textarea class="form-control" rows="5" placeholder="Batareyanın həcmi -- 10000 mAh | Enerji yığma müddəti  -- 2 saat |" name="product_tags" id="productTagsInput" ></textarea>
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <label for="salePrice" class="col-md-2 col-form-label col-form-label-sm">Reng</label>
+                                <div class="col-md-10">
+                                    <input type="text" placeholder="Qara|Ag" class="form-control form-control-sm" name="product_colors">
+                                </div>
+                            </div>
+                            <input type="submit" value="Elave et"></input>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- main content end -->
+{% endblock %}   

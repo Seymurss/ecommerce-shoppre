@@ -1,0 +1,103 @@
+{% extends 'dashboard/dashboardlayouts.html' %}
+{% load static %}
+{% block mainblock %}
+    <!-- main content start -->
+    <div class="main-content">
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h5>All Products</h5>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-filter-option"> 
+                            <div class="row g-3">
+                                <div class="col-xl-10 col-9 col-xs-12">
+                                    <form method="post" action="{% url 'allproduct' %}">
+                                        {% csrf_token %}
+                                        <div class="row g-3">
+                                            <div class="col">
+                                                <select class="form-select form-select-sm" id="parent_category" name="parent_category">
+                                                    <option value="0">All Category</option>
+                                                    {% for category in categories %}
+                                                        {% if not category.parent %}
+                                                            <option value="{{ category.id }}">{{ category.title }}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="col">
+                                                <select class="form-select form-select-sm" id="sub_category" name="sub_category">
+                                                    <option value="0">Sec</option>
+                                                </select>
+                                            </div>
+                                            <div class="col">
+                                                <select class="form-select form-select-sm" id="sub_sub_category" name="sub_sub_category">
+                                                    <option value="0">Sec</option>
+                                                </select>
+                                            </div>
+                                            <div class="col">
+                                                <button type="submit" class="btn btn-sm btn-primary w-100">Filtre</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-dashed table-hover digi-dataTable all-product-table table-striped" id="allProductTable">
+                            <thead>
+                                <tr>
+                                    <th>Mehsul</th>
+                                    <th>SKU</th>
+                                    <th>Stock sayi</th>
+                                    <th>Satis meblegi</th>
+                                    <th>Satis sayi</th>
+                                    <th>Emeliyatlar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for product in products %}
+                                <tr>
+                                    <td>
+                                        <div class="table-product-card">
+                                            {% if product.primary_photo %}
+                                                <div class="part-img">
+                                                    <img src="{{ product.primary_photo.url }}" alt="Image">
+                                                </div>
+                                            {% endif%}
+                                            <div class="part-txt">
+                                                <span class="product-name">{{ product.title }}</span>
+                                                <span class="product-category">Kategoriya: {{ product.sub_category.title }}/{{ product.sub_sub_category.title }}</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{{ product.sku}} </td>
+                                    <td>{{ product.product_count}} </td>
+                                    <td>{{ product.sale_price }}</td>
+                                    <td>0</td>
+                                    <td>
+                                        <div class="btn-box">
+                                            <form method="post" action="{% url 'updatedata' product_id=product.id %}">
+                                                {% csrf_token %}
+                                                <button><i class="fa-light fa-pen"></i></button>
+                                            </form>
+                                            <form action="{% url 'delete_product' product.id %}" method="post">
+                                                {% csrf_token %}
+                                                <button type="submit"><i class="fa-light fa-trash"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <div class="table-bottom-control"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

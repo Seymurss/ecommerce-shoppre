@@ -1,0 +1,84 @@
+{% extends 'main/layout.html' %}
+{% block title %} home pages {% endblock title %}
+{% load static %}
+{% block content %}
+		<section class="flat-shop-cart">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8">
+						<div class="table-cart">
+							<table>
+								<thead>
+									<tr>
+										<th>Məhsul</th>
+										<th>Sayı</th>
+										<th>Toplam</th>
+										<th></th>
+									</tr>
+								</thead>
+
+
+
+								<tbody>
+									{% for product in products_in_cart %}
+									<tr>
+										<td>
+											{% if product.primary_photo_url %}
+												<div class="img-product">
+													<img src="{{ product.primary_photo_url }}" alt="Image Description"/>
+												</div>
+										    {% endif %}									
+											<div class="name-product" style="width: 50%;font-size: 15px;">
+												{{ product.title }}
+											</div>
+											<div class="price" id="price-{{ product.id }}">
+												{{ product.sale_price}}
+											</div>
+											<div class="clearfix"></div>
+										</td>
+										<td>
+											<div class="quanlity">
+												<span class="btn-down" data-product-id="{{ product.id }}"></span>
+												<input type="number" id="quantity-{{ product.id }}" class="quantity-input" value="1" min="1" max="100" placeholder="Quantity">
+												<span class="btn-up" data-product-id="{{ product.id }}"></span>
+											</div>
+										</td>
+										<td>
+											<div class="total" id="total-{{ product.id }}"><i class="fa-solid fa-manat-sign" style="margin-right: 8px;font-size: 17px;"></i>{{ product.sale_price}}</div>
+										</td>
+										<td>
+											<a href="{% url 'sepetten_cikar' product_id=product.id %}">
+												<img src="{% static 'images/icons/delete.png' %}" alt="">
+											</a>
+										</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+
+
+							</table>
+						</div><!-- /.table-cart -->
+					</div><!-- /.col-lg-8 -->
+					<div class="col-lg-4" style="margin-top: 47px;">
+						<div class="cart-totals">
+							<h3>Cart Totals</h3>
+							<form action="#" method="get" accept-charset="utf-8">
+								<table>
+									<tbody>
+										<tr>
+											<td>Total</td>
+											<td class="price-total">${{ total_price }}</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="btn-cart-totals">
+									<a href="" class="checkout" title="">Proceed to Checkout</a>
+								</div><!-- /.btn-cart-totals -->
+							</form><!-- /form -->
+						</div><!-- /.cart-totals -->
+					</div><!-- /.col-lg-4 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section><!-- /.flat-shop-cart -->
+{% endblock %}
+	

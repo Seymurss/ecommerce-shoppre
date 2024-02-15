@@ -1,0 +1,50 @@
+{% load static %}
+{% for filter_product in filter_products %}
+    <div class="product-box" style="margin-left: 20px;display: inline-block; width: 22%; height: 470px;margin-bottom:0px !important;margin-right: 5px;">
+        <div class="imagebox">
+            <ul class="box-image owl-carousel-1">
+                {% if filter_product.primary_photo %}
+                <a href="#" title="">
+                    <img style="height: 150px;" src="{{ filter_product.primary_photo.url }}" alt="">
+                </a>
+                {% endif %}
+            </ul><!-- /.box-image -->
+            <div class="box-content">
+                <div class="cat-name">
+                    <a href="#" title="">{{ filter_product.sub_sub_category.title }}</a>
+                </div>
+                <div class="product-name">
+                    <a href="{% url 'product_detail' product_slug=filter_product.slug %}" title="{{ filter_product.title }}">{{ filter_product.title }}</a>
+                </div>	
+                <div class="price">
+                    <span class="sale">${{ filter_product.sale_price }}</span>
+                    <span class="regular">${{ filter_product.regular_price }}</span>
+                </div>
+            </div><!-- /.box-content -->
+            <div class="box-bottom">
+                <div class="btn-add-cart">
+                    <form method="GET" action="{% url 'sepete_ekle' product_id=filter_product.id %}">
+                        {% csrf_token %}
+                        <button type="submit" style="width: 204px; margin-top: 5px;">
+                            <img src="{% static 'images/icons/add-cart.png' %}" alt="">	Səbətə Əlavə et
+                        </button>
+                    </form>
+                </div>
+
+                <div class="compare-wishlist">
+                    <a href="#" class="compare" title="">
+                        <img src="{% static 'images/icons/compare.png' %}" alt="">Muqayisə
+                    </a>
+                    <a href="#" class="wishlist" title="">
+                        <img src="{% static 'images/icons/wishlist.png' %}" alt="">Arzu Siyahisi
+                    </a>
+                </div>
+            </div><!-- /.box-bottom -->
+        </div><!-- /.imagebox -->
+    </div>	
+{% endfor %}
+
+
+
+
+

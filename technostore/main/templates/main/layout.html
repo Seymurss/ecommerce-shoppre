@@ -1,0 +1,566 @@
+{% load i18n %}
+<!DOCTYPE html>
+	{% load static %}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"><!--<![endif]-->
+
+<head>
+	<!-- Basic Page Needs -->
+	<meta charset="UTF-8">
+	<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+	<title>{% block title %} {% endblock title %}</title>
+
+	<meta name="author" content="CreativeLayers">
+
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- Boostrap style -->
+	<link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}">
+
+	<!-- Theme style -->
+	<link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}">
+
+	<!-- Reponsive -->
+	<link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}">
+
+	<link rel="shortcut icon" href="{% static 'favicon/favicon.png' %}">
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body class="header_sticky">
+	<div class="boxed">		
+		<section id="header" class="header">
+			<div class="header-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-4">
+							<ul class="flat-support">
+								<li>
+									<a href="{% url 'home' %}" title="">{% blocktrans %}Home{% endblocktrans %}</a>
+								</li>
+								<li>
+									<a href="{% url 'contact' %}" title="">Elaqə</a>
+								</li>
+							</ul><!-- /.flat-support -->
+						</div><!-- /.col-md-4 -->
+						<div class="col-md-4">
+							<ul class="flat-infomation">
+								<li class="phone">
+									Bizimle elaqe: <a href="#" title="">(888) 1234 56789</a>
+								</li>
+							</ul><!-- /.flat-infomation -->
+						</div><!-- /.col-md-4 -->
+						<div class="col-md-4">
+							<ul class="flat-unstyled">
+								<li class="account">
+									<a href="my-account.html" title="">Şəxsi Kabinet</a>
+								</li>
+								<li>
+									<a href="#" title="{% trans 'English' %}">
+										English
+										<i class="fa fa-angle-down" aria-hidden="true"></i>
+									</a>
+									<ul class="unstyled">
+										<li>
+											<a href="{% url 'change_language' 'ru' %}" title="{% trans 'Russian' %}">Rus</a>
+										</li>
+										<li>
+											<a href="{% url 'change_language' 'Az' %}" title="{% trans 'Azerbaijan' %}">Azerbaijan</a>
+										</li>
+										<li>
+											<a href="{% url 'change_language' 'en' %}" title="{% trans 'English' %}">English</a>
+										</li>
+									</ul><!-- /.unstyled -->
+									
+								</li>
+							</ul><!-- /.flat-unstyled -->
+						</div><!-- /.col-md-4 -->
+					</div><!-- /.row -->
+				</div><!-- /.container -->
+			</div><!-- /.header-top -->
+			<div class="header-middle">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-3">
+							<div id="logo" class="logo">
+								<a href="index.html" title="">
+									<img src="{% static 'images/logos/logo.png' %}" alt="">
+								</a>
+							</div><!-- /#logo -->
+						</div><!-- /.col-md-3 -->
+						<div class="col-md-6">
+							<div class="top-search">
+								<form action="{% url 'search' %}" method="get" class="form-search" accept-charset="utf-8">
+
+									<div class="box-search">
+										<input type="text" name="search" placeholder="Axtar....">
+										<span class="btn-search">
+											<button type="submit" class="waves-effect"><img src="{% static 'images/icons/search.png' %}" alt=""></button>
+										</span>
+									</div><!-- /.box-search -->
+								</form><!-- /.form-search -->
+							</div><!-- /.top-search -->
+						</div><!-- /.col-md-6 -->
+						<div class="col-md-3">
+							<div class="box-cart">
+								<div class="inner-box">
+									<ul class="menu-compare-wishlist">
+										<li class="compare">
+											<a href="compare.html" title="">
+												<img src="{% static 'images/icons/compare.png' %}" alt="">
+											</a>
+										</li>
+										<li class="wishlist">
+											<a href="wishlist.html" title="">
+												<img src="{% static 'images/icons/wishlist.png' %}" alt="">
+											</a>
+										</li>
+									</ul><!-- /.menu-compare-wishlist -->
+								</div><!-- /.inner-box -->
+								<div class="inner-box">
+									<a href="{% url 'sepet' %}" title="">
+										<div class="icon-cart">
+											<img src="{% static 'images/icons/cart.png' %}" alt="">
+											<span>4</span>
+										</div>
+										<div class="price">
+											$0.00
+										</div>
+									</a>
+									<div class="dropdown-box">
+										<ul>
+											<li>
+												<div class="img-product">
+													<img src="{% static 'images/product/other/img-cart-1.jpg' %}" alt="">
+												</div>
+												<div class="info-product">
+													<div class="name">
+														Samsung - Galaxy S6 4G LTE <br />with 32GB Memory Cell Phone
+													</div>
+													<div class="price">
+														<span>1 x</span>
+														<span>$250.00</span>
+													</div>
+												</div>
+												<div class="clearfix"></div>
+												<span class="delete">x</span>
+											</li>
+										</ul>
+										<div class="total">
+											<span>Subtotal:</span>
+											<span class="price">$1,999.00</span>
+										</div>
+										<div class="btn-cart">
+											<a href="{% url 'sepet' %}" class="view-cart" title="">View Cart</a>
+										</div>
+									</div>
+								</div><!-- /.inner-box -->
+							</div><!-- /.box-cart -->
+						</div><!-- /.col-md-3 -->
+					</div><!-- /.row -->
+				</div><!-- /.container -->
+			</div><!-- /.header-middle -->
+			<div class="header-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-3 col-2">
+							<div id="mega-menu">
+			                  {% include 'main/categories.html' %}
+					      </div>
+				        </div><!-- /.col-md-3 -->
+			        </div><!-- /.row -->
+			    </div><!-- /.container -->
+			</div><!-- /.header-bottom -->
+
+		</section><!-- /#header -->
+		<div class="preloader">
+			<div class="clear-loading loading-effect-2">
+				<span></span>
+			</div>
+		</div>
+        {% block content %}
+
+
+        {% endblock %}
+        <footer>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-md-6">
+						<div class="widget-ft widget-about">
+							<div class="logo logo-ft">
+								<a href="index.html" title="">
+									<img src="{% static 'images/logos/logo-ft.png' %}" alt="">
+								</a>
+							</div><!-- /.logo-ft -->
+							<div class="widget-content">
+								<div class="icon">
+									<img src="{% static 'images/icons/call.png' %}" alt="">
+								</div>
+								<div class="info">
+									<p class="questions">Got Questions ? Call us 24/7!</p>
+									<p class="phone">Call Us: (888) 1234 56789</p>
+									<p class="address">
+										PO Box CT16122 Collins Street West, Victoria 8007,<br />Australia.
+									</p>
+								</div>
+							</div><!-- /.widget-content -->
+							<ul class="social-list">
+								<li>
+									<a href="#" title="">
+										<i class="fa-brands fa-facebook"></i>
+									</a>
+								</li>
+								<li>
+									<a href="#" title="">
+										<i class="fa-brands fa-twitter"></i>
+									</a>
+								</li>
+								<li>
+									<a href="#" title="">
+										<i class="fa-brands fa-instagram"></i>
+									</a>
+								</li>
+								<li>
+									<a href="#" title="">
+										<i class="fa-brands fa-pinterest"></i>
+									</a>
+								</li>
+								<li>
+									<a href="#" title="">
+										<i class="fa-brands fa-google"></i>
+									</a>
+								</li>
+								<li>
+									<a href="#" title="">
+										<i class="fa-brands fa-linkedin"></i>
+									</a>
+								</li>
+							</ul><!-- /.social-list -->
+						</div><!-- /.widget-about -->
+					</div><!-- /.col-lg-3 col-md-6 -->
+					<div class="col-lg-3 col-md-6">
+						<div class="widget-ft widget-categories-ft">
+							<div class="widget-title">
+								<h3>Find By Categories</h3>
+							</div>
+							<ul class="cat-list-ft">
+								<li>
+									<a href="#" title="">Desktops</a>
+								</li>
+								<li>
+									<a href="#" title="">Laptops & Notebooks</a>
+								</li>
+								<li>
+									<a href="#" title="">Components</a>
+								</li>
+								<li>
+									<a href="#" title="">Tablets</a>
+								</li>
+								<li>
+									<a href="#" title="">Software</a>
+								</li>
+								<li>
+									<a href="#" title="">Phones & PDAs</a>
+								</li>
+								<li>
+									<a href="#" title="">Cameras</a>
+								</li>
+							</ul><!-- /.cat-list-ft -->
+						</div><!-- /.widget-categories-ft -->
+					</div><!-- /.col-lg-3 col-md-6 -->
+					<div class="col-lg-2 col-md-6">
+						<div class="widget-ft widget-menu">
+							<div class="widget-title">
+								<h3>Customer Care</h3>
+							</div>
+							<ul>
+								<li>
+									<a href="#" title="">
+										Contact us
+									</a>
+								</li>
+								<li>
+									<a href="#" title="">
+										Site Map
+									</a>
+								</li>
+								<li>
+									<a href="#" title="">
+										My Account
+									</a>
+								</li>
+								<li>
+									<a href="#" title="">
+										Wish List
+									</a>
+								</li>
+								<li>
+									<a href="#" title="">
+										Delivery Information
+									</a>
+								</li>
+								<li>
+									<a href="#" title="">
+										Privacy Policy
+									</a>
+								</li>
+								<li>
+									<a href="#" title="">
+										Terms & Conditions
+									</a>
+								</li>
+							</ul>
+						</div><!-- /.widget-menu -->
+					</div><!-- /.col-lg-2 col-md-6 -->
+					<div class="col-lg-4 col-md-6">
+						<div class="widget-ft widget-newsletter">
+							<div class="widget-title">
+								<h3>Sign Up To New Letter</h3>
+							</div>
+							<p>Make sure that you never miss our interesting <br />
+								news by joining our newsletter program
+							</p>
+							<form action="#" class="subscribe-form" method="get" accept-charset="utf-8">
+								<div class="subscribe-content">
+									<input type="text" name="email" class="subscribe-email" placeholder="Your E-Mail">
+									<button type="submit"><img src="{% static 'images/icons/right-2.png' %}" alt=""></button>
+								</div>
+							</form><!-- /.subscribe-form -->
+							<ul class="pay-list">
+								<li>
+									<a href="#" title="">
+										<img src="{% static 'images/logos/ft-01.png' %}" alt="">
+									</a>
+								</li>
+								<li>
+									<a href="#" title="">
+										<img src="{% static 'images/logos/ft-02.png' %}" alt="">
+									</a>
+								</li>
+								<li>
+									<a href="#" title="">
+										<img src="{% static 'images/logos/ft-03.png' %}" alt="">
+									</a>
+								</li>
+								<li>
+									<a href="#" title="">
+										<img src="{% static 'images/logos/ft-04.png' %}" alt="">
+									</a>
+								</li>
+								<li>
+									<a href="#" title="">
+										<img src="{% static 'images/logos/ft-05.png' %}" alt="">
+									</a>
+								</li>
+							</ul><!-- /.pay-list -->
+						</div><!-- /.widget-newsletter -->
+					</div><!-- /.col-lg-4 col-md-6 -->
+				</div><!-- /.row -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="widget widget-apps">
+							<div class="widget-title">
+								<h3>Mobile Apps</h3>
+							</div>
+							<ul class="app-list">
+								<li class="app-store">
+									<a href="#" title="">
+										<div class="img">
+											<img src="{% static 'images/icons/app-store.png' %}" alt="">
+										</div>
+										<div class="text">
+											<h4>App Store</h4>
+											<p>Available now on the</p>
+										</div>
+									</a>
+								</li><!-- /.app-store -->
+								<li class="google-play">
+									<a href="#" title="">
+										<div class="img">
+											<img src="{% static 'images/icons/google-play.png' %}" alt="">
+										</div>
+										<div class="text">
+											<h4>Google Play</h4>
+											<p>Get in on</p>
+										</div>
+									</a>	
+								</li><!-- /.google-play -->
+							</ul><!-- /.app-list -->
+						</div><!-- /.widget-apps -->
+					</div><!-- /.col-md-12 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</footer><!-- /footer -->
+
+		<section class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<p class="copyright"> All Rights Reserved © Techno Store 2017</p>
+						<p class="btn-scroll">
+							<a href="#" title="">
+								<img src="{% static 'images/icons/top.png' %}'" alt="">
+							</a>
+						</p>
+					</div><!-- /.col-md-12 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section><!-- /.footer-bottom -->
+
+	</div><!-- /.boxed -->
+		<script type="text/javascript" src="{% static 'javascript/jquery.min.js' %}"></script>
+		<script>
+			$(document).ready(function () {
+				$('.dropdown, .btn-mega').hover(
+					function () {
+						var categoryId = $(this).data('category-id');
+
+						if (categoryId === 'all-categories') {
+							$.ajax({
+								type: 'GET',
+								url: '/get-categories/' + categoryId + '/',
+								success: function (data) {
+									$('#mega-menu').html(data.categories_html);
+								}
+							});
+						}
+					},
+				);
+		});
+		</script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				var currentPath = window.location.pathname.toLowerCase();
+				var headerBottom = document.querySelector('.header-bottom');
+		
+				if (currentPath === '/shop') {
+					headerBottom.classList.add('d-none');
+				}
+			});
+		</script>
+		<script>
+					document.addEventListener('DOMContentLoaded', function () {
+						var currentPath = window.location.pathname.toLowerCase();
+						var headerBottom = document.querySelector('.header-bottom');
+				
+						if (currentPath === '/contact') {
+							headerBottom.classList.add('d-none');
+						}
+					});
+		</script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				var currentPath = window.location.pathname.toLowerCase();
+				var headerBottom = document.querySelector('.header-bottom');
+			
+				if (currentPath === '/search') {
+					headerBottom.classList.add('d-none');
+				}
+			});
+		</script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				var currentPath = window.location.pathname.toLowerCase();
+				var headerBottom = document.querySelector('.header-bottom');
+			
+				if (currentPath === '/sepet/') {
+					headerBottom.classList.add('d-none');
+				}
+			});
+		</script>
+		<script>
+			$(document).ready(function () {
+				var defaultCategorySlug = "{{ categories.0.slug }}"; 
+				fetchProducts(defaultCategorySlug);
+			});
+		
+			$(".category-link").click(function () {
+				var categorySlug = $(this).data("category-slug");
+				fetchProducts(categorySlug);  
+			});
+		
+			function fetchProducts(categorySlug) {
+				$.ajax({
+					url: "/fetch-products/",
+					method: "GET",
+					data: { category_slug: categorySlug },
+					success: function (data) {
+						$("#product-container").html(data.product_html);
+					},
+					error: function (xeta) {
+						console.error("Mehsul yuklendikde xeta bas verdi: ", xeta);
+					}
+				});
+			}
+		</script>
+		<script>
+				$(document).ready(function() {
+				$('.btn-down, .btn-up').click(function() {
+				var productId = $(this).data('product-id');
+				var quantityInput = $('#quantity-' + productId);
+				var quantity = parseInt(quantityInput.val());
+				var price = parseFloat($('#price-' + productId).text().replace('$', ''));
+
+				// Miqdari artır veya azald
+				if ($(this).hasClass('btn-down')) {
+					if (quantity > 1) {
+						quantity -= 1;
+						quantityInput.val(quantity);
+					}
+				} else {
+					quantity += 1;
+					quantityInput.val(quantity);
+				}
+
+				// yenilenen miqdari ve meblegle  total meblegi yenile
+				updateTotal();
+			});
+
+			// total meblegi yenile 
+			function updateTotal() {
+				var totalPrice = 0;
+
+				// Her bir productin oz  toplamini  hesabla
+				$('.quanlity').each(function() {
+					var productId = $(this).find('.btn-up').data('product-id');
+					var quantity = parseInt($('#quantity-' + productId).val());
+					var price = parseFloat($('#price-' + productId).text().replace('$', ''));
+					var total = quantity * price;
+					$('#total-' + productId).html('<i class="fa-solid fa-manat-sign" style="margin-right: 8px;font-size: 17px;"></i>' + total.toFixed(2));
+					totalPrice += total;
+				});
+
+				// Her bir productin oz  toplamini  yenile
+				$('.price-total').text('$' + totalPrice.toFixed(2));
+			}
+		});
+
+		</script>
+       <script type="text/javascript" src="{% static 'javascript/jquery-ui.js' %}"></script>
+		<script type="text/javascript" src="{% static 'javascript/tether.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'javascript/bootstrap.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'javascript/waypoints.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'javascript/easing.js' %}"></script>
+		<script type="text/javascript" src="{% static 'javascript/jquery.zoom.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'javascript/jquery.flexslider-min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'javascript/owl.carousel.js' %}"></script>
+		<script type="text/javascript" src="{% static 'javascript/smoothscroll.js' %}"></script>
+		<script type="text/javascript" src="{% static 'javascript/jquery.mCustomScrollbar.js' %}"></script>
+		<script type="text/javascript" src="{% static 'javascript/waves.min.js' %}"></script> 
+		<script type="text/javascript" src="{% static 'javascript/jquery.countdown.js' %}"></script>
+		<script type="text/javascript" src="{% static 'javascript/main.js' %}"></script>
+
+		<script type="text/javascript" src="{% static 'javascript/jquery.circlechart.js' %}"></script>
+		<script type="text/javascript" src="{% static 'javascript/tether.min.js' %}"></script>
+
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&region=AZ"></script>
+	    <script type="text/javascript" src="{% static 'javascript/gmap3.min.js' %}"></script>
+
+
+	
+
+
+		
+</body>	
+</html>

@@ -1,0 +1,152 @@
+{% extends 'main/layout.html' %}
+{% block title %} Shopping pages {% endblock title %}
+{% load static %}
+{% block content %}
+
+		<section class="flat-breadcrumb">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumbs">
+							<li class="trail-item">
+								<a href="#" title="">Home</a>
+								<span><img src="{% static 'images/icons/arrow-right.png' %}" alt=""></span>
+							</li>
+							<li class="trail-item">
+								<a href="#" title="">Search</a>
+								<span><img src="{% static 'images/icons/arrow-right.png' %}" alt=""></span>
+							</li>
+							<li class="trail-end">
+								<a href="#" title="">{{ search_query }}</a>
+							</li>
+						</ul><!-- /.breacrumbs -->
+					</div><!-- /.col-md-12 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section><!-- /.flat-breadcrumb -->
+
+		<main id="shop">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 col-md-8">
+						<div class="main-shop">
+							<div class="slider owl-carousel-16">
+							</div><!-- /.slider -->
+							<div class="wrap-imagebox">
+								<div class="tab-product">
+									<div class="row sort-box">
+                                    {% for search_product in search_products %}
+										<div class="col-lg-3 col-sm-6">
+                                            <div class="product-box" style="margin-left: 25px;display: inline-block; width: 100%; height: 470px;margin-bottom:0px !important;margin-right: 15px;">
+                                                <div class="imagebox">
+                                                    <ul class="box-image owl-carousel-1">
+                                                        {% if search_product.primary_photo %}
+                                                        <a href="#" title="">
+                                                            <img style="height: 150px;" src="{{ search_product.primary_photo.url }}" alt="">
+                                                        </a>
+                                                        {% endif %}
+                                                        {% if search_product.photo1 %}
+                                                        <a href="#" title="">
+                                                            <img style="height: 150px;" src="{{ search_product.photo1.url }}" alt="">
+                                                        </a>
+                                                        {% endif %}
+                                                        {% if search_product.photo2 %}
+                                                        <a href="#" title="">
+                                                            <img style="height: 150px;" src="{{ search_product.photo2.url }}" alt="">
+                                                        </a>
+                                                        {% endif %}
+                                                        {% if search_product.photo3 %}
+                                                        <a href="#" title="">
+                                                            <img style="height: 150px;" src="{{ search_product.photo3.url }}" alt="">
+                                                        </a>
+                                                        {% endif %}
+                                                        {% if search_product.photo4 %}
+                                                        <a href="#" title="">
+                                                            <img style="height: 150px;" src="{{ search_product.photo4.url }}" alt="">
+                                                        </a>
+                                                        {% endif %}
+                                                    </ul><!-- /.box-image -->
+                                                    <div class="box-content">
+                                                        <div class="cat-name">
+                                                            <a href="#" title="">{{ search_product.sub_sub_category.title }}</a>
+                                                        </div>
+														<div class="product-name">
+															<a href="{% url 'product_detail' product_slug=search_product.slug %}" title="{{ search_product.title }}">{{ search_product.title }}</a>
+														</div>	
+                                                        <div class="price">
+                                                            <span class="sale">${{ search_product.sale_price }}</span>
+                                                            <span class="regular">${{ search_product.regular_price }}</span>
+                                                        </div>
+                                                    </div><!-- /.box-content -->
+                                                    <div class="box-bottom">
+														<div class="btn-add-cart">
+															<form method="post" action="{% url 'sepete_ekle' product_id=search_product.id %}">
+																{% csrf_token %}
+																<button type="submit" style="width: 204px; margin-top: 5px;">
+																	<img src="{% static 'images/icons/add-cart.png' %}" alt="">	Səbətə Əlavə et
+																</button>
+															</form>
+														</div>
+                                                        <div class="compare-wishlist">
+                                                            <a href="#" class="compare" title="">
+                                                                <img src="{% static 'images/icons/compare.png' %}" alt="">Muqayisə
+                                                            </a>
+                                                            <a href="#" class="wishlist" title="">
+                                                                <img src="{% static 'images/icons/wishlist.png' %}" alt="">Arzu Siyahisi
+                                                            </a>
+                                                        </div>
+                                                    </div><!-- /.box-bottom -->
+                                                </div><!-- /.imagebox -->
+                                            </div>	
+										</div><!-- /.col-lg-3 col-sm-6 -->
+                                    {% empty %}
+                                        <p>Netice Tapilmadi "{{ search_query }}"</p>
+                                    {% endfor %}    
+									</div>
+								
+								</div>
+							</div><!-- /.wrap-imagebox -->
+							<div class="blog-pagination">
+								<span>
+									Showing {{ search_products.start_index }}–{{ search_products.end_index }} of {{ search_products.paginator.count }} results
+								</span>
+								<ul class="flat-pagination style1">
+									{% if search_products.has_previous %}
+										<li class="prev">
+											<a href="?search={{ search_query }}&page=1" title="">
+												<img src="{% static 'images/icons/left-1.png' %}" alt="">İlk
+											</a>
+										</li>
+										<li class="prev">
+											<a href="?search={{ search_query }}&page={{ search_products.previous_page_number }}" title="">
+												<img src="{% static 'images/icons/left-1.png' %}" alt="">Geri
+											</a>
+										</li>
+									{% endif %}
+							
+									{% for num in search_products.paginator.page_range %}
+										<li{% if num == search_products.number %} class="active"{% endif %}>
+											<a href="?search={{ search_query }}&page={{ num }}" class="waves-effect" title="">{{ num }}</a>
+										</li>
+									{% endfor %}
+							
+									{% if search_products.has_next %}
+										<li class="next">
+											<a href="?search={{ search_query }}&page={{ search_products.next_page_number }}" title="">
+												İrəli<img src="{% static 'images/icons/right-1.png' %}" alt="">
+											</a>
+										</li>
+										<li class="next">
+											<a href="?search={{ search_query }}&page={{ search_products.paginator.num_pages }}" title="">
+												Son<img src="{% static 'images/icons/right-1.png' %}" alt="">
+											</a>
+										</li>
+									{% endif %}
+								</ul>
+							</div>
+						</div><!-- /.main-shop -->
+					</div><!-- /.col-lg-9 col-md-8 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</main><!-- /#shop -->
+{% endblock %}

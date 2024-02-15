@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+ {% load static %}
+<!-- Mirrored from revel-html.codebasket.xyz/dashboard-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 12 Jan 2024 11:38:12 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Revel eCommerce Admin</title>
+    <link rel="stylesheet" href="{% static 'dashboard/assets/vendor/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/assets/vendor/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/assets/css/style.css' %}">
+    <link rel="stylesheet" id="primaryColor" href="{% static 'dashboard/assets/css/orange-color.css' %}">
+    <link rel="stylesheet" id="rtlStyle" href="#">    
+</head>
+<body class="body-padding body-p-top light-theme">
+
+        {% if request.session.is_logged_in %}
+            {% include 'dashboard/dshhome.html' %}
+        {% else %}
+            {% include 'dashboard/login.html' %}
+        {% endif %}
+
+    <script src="{% static 'dashboard/assets/vendor/js/jquery-3.6.0.min.js' %}"></script> 
+    <script src="{% static 'dashboard/assets/js/main.js' %}"></script>
+</body>
+</html>

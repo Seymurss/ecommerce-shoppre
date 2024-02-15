@@ -1,0 +1,37 @@
+{% load static %}
+
+<div class="btn-mega" data-category-id="all-categories"><span></span>Kataloq</div>
+<ul class="menu">
+    {% for category in categories %}
+        {% if not category.parent %}
+            <li>
+                <a href="{% url 'shop' category_slug=category.slug|slugify %}" title="" class="dropdown">
+                    <span class="menu-img">
+                        <i class="{{ category.icon }}"></i>        
+                    </span>
+                    <span class="menu-title">
+                        {{ category.title }}
+                    </span>
+                </a>
+                {% if category.children.exists %}
+                    <div class="drop-menu">
+                        {% for child_category in category.children.all %}
+                            <div class="one-third">
+                                <div class="cat-title">
+                                    {{ child_category.title }}
+                                </div>
+                                <ul>
+                                    {% for sub_category in child_category.children.all %}
+                                        <li>
+                                            <a href="{% url 'shop' category_slug=sub_category.slug|slugify %}" title="" class="cltitle">{{ sub_category.title }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>

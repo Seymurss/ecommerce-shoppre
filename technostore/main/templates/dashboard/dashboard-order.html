@@ -1,0 +1,430 @@
+{% extends 'dashboard/dashboardlayouts.html' %}
+{% load static %}
+
+
+{% block mainblock %}
+
+    <!-- main content start -->
+    <div class="main-content">
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h5>All Order</h5>
+                        <div class="btn-box d-flex gap-2">
+                            <div class="digi-dropdown dropdown">
+                                <ul class="digi-dropdown-menu dropdown-menu">
+                                    <li class="dropdown-title">Show Table Title</li>
+                                    <li>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="showOrderId" checked>
+                                            <label class="form-check-label" for="showOrderId">
+                                                Order ID
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="showCustomer" checked>
+                                            <label class="form-check-label" for="showCustomer">
+                                                Customer
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="showStatus" checked>
+                                            <label class="form-check-label" for="showStatus">
+                                                Status
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="showProduct" checked>
+                                            <label class="form-check-label" for="showProduct">
+                                                Product
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="showPrice" checked>
+                                            <label class="form-check-label" for="showPrice">
+                                                Price
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="showPaymentMethod" checked>
+                                            <label class="form-check-label" for="showPaymentMethod">
+                                                Payment Method
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="showDeliveryStatus" checked>
+                                            <label class="form-check-label" for="showDeliveryStatus">
+                                                Delivery Status
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="showOrderDate" checked>
+                                            <label class="form-check-label" for="showOrderDate">
+                                                Order Date
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="showAction" checked>
+                                            <label class="form-check-label" for="showAction">
+                                                Action
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li class="dropdown-title pb-1">Showing</li>
+                                    <li>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control form-control-sm w-50" value="10">
+                                            <button class="btn btn-sm btn-primary w-50">Apply</button>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="product-table-quantity d-flex justify-content-between align-items-center mb-20">
+                            <div class="btn-box d-lg-flex d-none gap-2">
+                                <button class="btn btn-sm btn-icon btn-outline-primary" title="Download Excel" id="downloadExcel"><i class="fa-light fa-file-spreadsheet"></i></button>
+                                <button class="btn btn-sm btn-icon btn-outline-primary" title="Download PDF" id="downloadPdf"><i class="fa-light fa-file-pdf"></i></button>
+                            </div>
+                        </div>
+                        <div class="table-filter-option">
+                            <div class="row g-3">
+                                <div class="col-xl-10 col-9 col-xs-12">
+                                    <div class="row g-3">
+                                        <div class="col">
+                                            <input type="text" class="form-control form-control-sm" name="basic" id="orderTableFilter" readonly>
+                                        </div>
+                                        <div class="col">
+                                            <button class="btn btn-sm btn-primary"><i class="fa-light fa-filter"></i> Filter</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-dashed table-hover digi-dataTable all-product-table table-striped" id="allProductTable">
+                            <thead>
+                                <tr>
+                                    <th class="no-sort">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="markAllProduct">
+                                        </div>
+                                    </th>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Status</th>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Payment Method</th>
+                                    <th>Delivery Status</th>
+                                    <th>Order Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                        </div>
+                                    </td>
+                                    <td><a href="dashboard-invoices.html">#22120101</a></td>
+                                    <td>Shaikh Abu Dardah</td>
+                                    <td><span class="text-danger">Pending</span></td>
+                                    <td>12</td>
+                                    <td>$256</td>
+                                    <td>Cash on</td>
+                                    <td><span class="badge bg-success">Delivered</span></td>
+                                    <td>12/24/2023 - 01:05 PM</td>
+                                    <td>
+                                        <div class="btn-box">
+                                            <button><i class="fa-light fa-eye"></i></button>
+                                            <button><i class="fa-light fa-pen"></i></button>
+                                            <button><i class="fa-light fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                        </div>
+                                    </td>
+                                    <td><a href="dashboard-invoices.html">#22120102</a></td>
+                                    <td>Shaikh Abu Dardah</td>
+                                    <td><span class="text-warning">Hold</span></td>
+                                    <td>15</td>
+                                    <td>$625</td>
+                                    <td>Paypal</td>
+                                    <td><span class="badge bg-danger">Canceled</span></td>
+                                    <td>12/24/2023 - 01:05 PM</td>
+                                    <td>
+                                        <div class="btn-box">
+                                            <button><i class="fa-light fa-eye"></i></button>
+                                            <button><i class="fa-light fa-pen"></i></button>
+                                            <button><i class="fa-light fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                        </div>
+                                    </td>
+                                    <td><a href="dashboard-invoices.html">#22120103</a></td>
+                                    <td>Shaikh Abu Dardah</td>
+                                    <td><span class="text-danger">Pending</span></td>
+                                    <td>12</td>
+                                    <td>$256</td>
+                                    <td>Cash on</td>
+                                    <td><span class="badge bg-success">Delivered</span></td>
+                                    <td>12/24/2023 - 01:05 PM</td>
+                                    <td>
+                                        <div class="btn-box">
+                                            <button><i class="fa-light fa-eye"></i></button>
+                                            <button><i class="fa-light fa-pen"></i></button>
+                                            <button><i class="fa-light fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                        </div>
+                                    </td>
+                                    <td><a href="dashboard-invoices.html">#22120104</a></td>
+                                    <td>Shaikh Abu Dardah</td>
+                                    <td><span class="text-warning">Hold</span></td>
+                                    <td>15</td>
+                                    <td>$625</td>
+                                    <td>Paypal</td>
+                                    <td><span class="badge bg-danger">Canceled</span></td>
+                                    <td>12/24/2023 - 01:05 PM</td>
+                                    <td>
+                                        <div class="btn-box">
+                                            <button><i class="fa-light fa-eye"></i></button>
+                                            <button><i class="fa-light fa-pen"></i></button>
+                                            <button><i class="fa-light fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                        </div>
+                                    </td>
+                                    <td><a href="dashboard-invoices.html">#22120101</a></td>
+                                    <td>Shaikh Abu Dardah</td>
+                                    <td><span class="text-danger">Pending</span></td>
+                                    <td>12</td>
+                                    <td>$256</td>
+                                    <td>Cash on</td>
+                                    <td><span class="badge bg-success">Delivered</span></td>
+                                    <td>12/24/2023 - 01:05 PM</td>
+                                    <td>
+                                        <div class="btn-box">
+                                            <button><i class="fa-light fa-eye"></i></button>
+                                            <button><i class="fa-light fa-pen"></i></button>
+                                            <button><i class="fa-light fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                        </div>
+                                    </td>
+                                    <td><a href="dashboard-invoices.html">#22120102</a></td>
+                                    <td>Shaikh Abu Dardah</td>
+                                    <td><span class="text-warning">Hold</span></td>
+                                    <td>15</td>
+                                    <td>$625</td>
+                                    <td>Paypal</td>
+                                    <td><span class="badge bg-danger">Canceled</span></td>
+                                    <td>12/24/2023 - 01:05 PM</td>
+                                    <td>
+                                        <div class="btn-box">
+                                            <button><i class="fa-light fa-eye"></i></button>
+                                            <button><i class="fa-light fa-pen"></i></button>
+                                            <button><i class="fa-light fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                        </div>
+                                    </td>
+                                    <td><a href="dashboard-invoices.html">#22120103</a></td>
+                                    <td>Shaikh Abu Dardah</td>
+                                    <td><span class="text-danger">Pending</span></td>
+                                    <td>12</td>
+                                    <td>$256</td>
+                                    <td>Cash on</td>
+                                    <td><span class="badge bg-success">Delivered</span></td>
+                                    <td>12/24/2023 - 01:05 PM</td>
+                                    <td>
+                                        <div class="btn-box">
+                                            <button><i class="fa-light fa-eye"></i></button>
+                                            <button><i class="fa-light fa-pen"></i></button>
+                                            <button><i class="fa-light fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                        </div>
+                                    </td>
+                                    <td><a href="dashboard-invoices.html">#22120104</a></td>
+                                    <td>Shaikh Abu Dardah</td>
+                                    <td><span class="text-warning">Hold</span></td>
+                                    <td>15</td>
+                                    <td>$625</td>
+                                    <td>Paypal</td>
+                                    <td><span class="badge bg-danger">Canceled</span></td>
+                                    <td>12/24/2023 - 01:05 PM</td>
+                                    <td>
+                                        <div class="btn-box">
+                                            <button><i class="fa-light fa-eye"></i></button>
+                                            <button><i class="fa-light fa-pen"></i></button>
+                                            <button><i class="fa-light fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                        </div>
+                                    </td>
+                                    <td><a href="dashboard-invoices.html">#22120101</a></td>
+                                    <td>Shaikh Abu Dardah</td>
+                                    <td><span class="text-danger">Pending</span></td>
+                                    <td>12</td>
+                                    <td>$256</td>
+                                    <td>Cash on</td>
+                                    <td><span class="badge bg-success">Delivered</span></td>
+                                    <td>12/24/2023 - 01:05 PM</td>
+                                    <td>
+                                        <div class="btn-box">
+                                            <button><i class="fa-light fa-eye"></i></button>
+                                            <button><i class="fa-light fa-pen"></i></button>
+                                            <button><i class="fa-light fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                        </div>
+                                    </td>
+                                    <td><a href="dashboard-invoices.html">#22120102</a></td>
+                                    <td>Shaikh Abu Dardah</td>
+                                    <td><span class="text-warning">Hold</span></td>
+                                    <td>15</td>
+                                    <td>$625</td>
+                                    <td>Paypal</td>
+                                    <td><span class="badge bg-danger">Canceled</span></td>
+                                    <td>12/24/2023 - 01:05 PM</td>
+                                    <td>
+                                        <div class="btn-box">
+                                            <button><i class="fa-light fa-eye"></i></button>
+                                            <button><i class="fa-light fa-pen"></i></button>
+                                            <button><i class="fa-light fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                        </div>
+                                    </td>
+                                    <td><a href="dashboard-invoices.html">#22120103</a></td>
+                                    <td>Shaikh Abu Dardah</td>
+                                    <td><span class="text-danger">Pending</span></td>
+                                    <td>12</td>
+                                    <td>$256</td>
+                                    <td>Cash on</td>
+                                    <td><span class="badge bg-success">Delivered</span></td>
+                                    <td>12/24/2023 - 01:05 PM</td>
+                                    <td>
+                                        <div class="btn-box">
+                                            <button><i class="fa-light fa-eye"></i></button>
+                                            <button><i class="fa-light fa-pen"></i></button>
+                                            <button><i class="fa-light fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                        </div>
+                                    </td>
+                                    <td><a href="dashboard-invoices.html">#22120104</a></td>
+                                    <td>Shaikh Abu Dardah</td>
+                                    <td><span class="text-warning">Hold</span></td>
+                                    <td>15</td>
+                                    <td>$625</td>
+                                    <td>Paypal</td>
+                                    <td><span class="badge bg-danger">Canceled</span></td>
+                                    <td>12/24/2023 - 01:05 PM</td>
+                                    <td>
+                                        <div class="btn-box">
+                                            <button><i class="fa-light fa-eye"></i></button>
+                                            <button><i class="fa-light fa-pen"></i></button>
+                                            <button><i class="fa-light fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="table-bottom-control"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}    
+
+
+
+
+<!-- 
+
+<div class="btn-box">
+    <button class="ctgbtn"><i class="fa-light fa-eye"></i></button>
+    <button class="ctgbtn"><i class="fa-light fa-pen-to-square"></i></button>
+    <button class="ctgbtn"><i class="fa-light fa-trash" style="color: red;"></i></button>
+    {% if category.is_active %}
+        <i class="fa-solid fa-power-off" style="color: red;"></i>
+    {% else %}
+        <i class="fa-solid fa-power-off" style="color: green;"></i>
+    {% endif %}
+</div> -->
